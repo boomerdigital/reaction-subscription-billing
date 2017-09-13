@@ -18,7 +18,7 @@ export const SubscriptionItem = new SimpleSchema({
 
 });
 
-export const SubscriptionItem = new SimpleSchema({
+export const Subscription= new SimpleSchema({
 
     Id: {
         type: String,
