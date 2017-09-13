@@ -31,6 +31,29 @@ export const Subscription= new SimpleSchema({
     items: {
         type: [SubscriptionItem],
         optional: true
+    },
+    trialPeriodMilliseconds: {
+        type: long,
+        optional: false
+    },
+    trialPeriodUnitType: {
+        type: String,
+        optional: false,
+        allowedValues: ["days","months"]
+    },
+    createdDate: {
+        type: String,
+        optional: false
+    },
+    nextBillingDate: {
+        type: Date,
+        optional: false
+    },
+    //Key value data for backend/api specific fields.
+    metadata: {
+        type: various,
+        required: false
     }
+
 
 });
