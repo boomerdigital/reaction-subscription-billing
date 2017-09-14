@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/boomerdigital/reaction-subscription-billing/issues"
   },
-  "homepage": "https://github.com/boomerdigital/reaction-subscription-billing#readme"
+  "homepage": "https://github.com/boomerdigital/reaction-subscription-billing#readme",
+  "dependencies": {
+    "stripe": "^5.0.0"
+  }
 }
