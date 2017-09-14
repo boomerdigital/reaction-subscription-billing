@@ -14,7 +14,7 @@ Fixtures();
 
 
 
-describe("Subscription", function () {
+describe("SubscriptionManager", function () {
     const user = Factory.create("registeredUser");
     const shop = getShop();
     const userId = user._id;
