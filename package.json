@@ -1,0 +1,25 @@
+{
+  "name": "reaction-subscription-billing",
+  "version": "1.0.0",
+  "description": "Subscription Billing Functionality for ReactionCommerce",
+  "main": "register.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boomerdigital/reaction-subscription-billing.git"
+  },
+  "keywords": [
+    "subscription",
+    "billing",
+    "recurring",
+    "payments"
+  ],
+  "author": "Daniel Honig and Contributors",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/boomerdigital/reaction-subscription-billing/issues"
+  },
+  "homepage": "https://github.com/boomerdigital/reaction-subscription-billing#readme"
+}
