@@ -16,7 +16,7 @@ class SubscriptionManager{
     }
 
     createSubscription(subscription){
-        Logger.info("creating subscription");
+        Logger.info({subscription},"creating subscription");
         return adapter.createSubscription(subscription);
     }
 
