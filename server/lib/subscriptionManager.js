@@ -1,5 +1,6 @@
 import {Config} from  '../config'
 import {Subscription} from './lib/collections'
+import { Logger } from "/server/api";
 
 class SubscriptionManager{
     var  adapter;
@@ -15,6 +16,7 @@ class SubscriptionManager{
     }
 
     createSubscription(subscription){
+        Logger.info("creating subscription");
         return adapter.createSubscription(subscription);
     }
 
