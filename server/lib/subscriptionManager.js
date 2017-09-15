@@ -3,11 +3,11 @@ import {Subscription} from './lib/collections'
 import { Logger } from "/server/api";
 
 class SubscriptionManager{
-    var  adapter;
+    let  adapter=null;
 
     constructor(adapterClassName){
      adapter= _adapterFactoryMethod;
-      if (adapter==nil)
+      if (adapter==null)
            throw "Adapter not found";
     }
 

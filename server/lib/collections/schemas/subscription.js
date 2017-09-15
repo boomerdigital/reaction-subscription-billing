@@ -18,6 +18,19 @@ export const SubscriptionItem = new SimpleSchema({
 
 });
 
+
+MetaDataField = new SimpleSchema({
+    key: {
+        type: String,
+        optional: false
+    },
+    value: {
+        type: String,
+        optional: false
+    }
+
+});
+
 export const Subscription= new SimpleSchema({
 
     Id: {
@@ -33,7 +46,7 @@ export const Subscription= new SimpleSchema({
         optional: true
     },
     trialPeriodMilliseconds: {
-        type: long,
+        type: Number,
         optional: false
     },
     trialPeriodUnitType: {
@@ -51,8 +64,8 @@ export const Subscription= new SimpleSchema({
     },
     //Key value data for backend/api specific fields.
     metadata: {
-        type: various,
-        required: false
+        type: [MetaDataField],
+        optional: false
     }
 
 
