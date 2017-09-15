@@ -10,7 +10,7 @@ class SubscriptionManager{
       if (adapter==null)
            throw "Adapter not found";
     }
-
+ dfkjdskjfskjd
     _adapterFactoryMethod(name){
       return Config.adapters[name];
     }
