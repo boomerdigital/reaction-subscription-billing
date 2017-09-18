@@ -1,4 +1,4 @@
 import { Meteor } from "meteor/meteor";
-import { Subscription } from "./lib/collections/schemas/subscription";
-import { SubscriptionManager } from "./lib/collections/schemas/subscription";
+import { Subscription } from "./lib/collections/collections";
+import { SubscriptionAdapter } from "./lib/subscriptionAdapter";
 import { SubscriptionConfig } from "./config";

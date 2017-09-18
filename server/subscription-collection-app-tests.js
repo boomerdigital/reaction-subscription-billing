@@ -7,7 +7,7 @@ import {Reaction} from "/server/api";
 import {Products, Accounts} from "/lib/collections";
 import {sinon} from "meteor/practicalmeteor:sinon";
 import Fixtures from "/server/imports/fixtures";
-import {Subscriptions} from "./lib/collections"
+import {Subscriptions} from "./lib/collections/collections"
 import {getShop} from "/server/imports/fixtures/shops";
 
 Fixtures();
@@ -42,6 +42,10 @@ describe("Subscription", function () {
     afterEach(function () {
         Meteor.users.remove({});
     });
+
+    it("Creates a Subscription for a user and order", function(){
+
+    })
 
 
 

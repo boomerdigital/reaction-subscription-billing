@@ -2,12 +2,11 @@
 import {expect} from "meteor/practicalmeteor:chai";
 import {Meteor} from "meteor/meteor";
 import {Factory} from "meteor/dburles:factory";
-import * as Collections from "/lib/collections";
 import {Reaction} from "/server/api";
 import {Products, Accounts} from "/lib/collections";
 import {sinon} from "meteor/practicalmeteor:sinon";
 import Fixtures from "/server/imports/fixtures";
-import {Subscriptions} from "./lib/collections"
+import {Subscriptions} from "./lib/collections/collections"
 import {getShop} from "/server/imports/fixtures/shops";
 
 Fixtures();
@@ -41,6 +40,11 @@ describe("SubscriptionManager", function () {
 
     afterEach(function () {
         Meteor.users.remove({});
+    });
+
+    it("Configures a subscription manager for a desired gateway", function(){
+
+        expect(1+1).eq(3);
     });
 
 

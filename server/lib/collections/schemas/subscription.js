@@ -19,7 +19,7 @@ export const SubscriptionItem = new SimpleSchema({
 });
 
 
-MetaDataField = new SimpleSchema({
+export const MetadataField = new SimpleSchema({
     key: {
         type: String,
         optional: false
@@ -64,7 +64,7 @@ export const Subscription= new SimpleSchema({
     },
     //Key value data for backend/api specific fields.
     metadata: {
-        type: [MetaDataField],
+        type: [MetadataField],
         optional: false
     }
 
