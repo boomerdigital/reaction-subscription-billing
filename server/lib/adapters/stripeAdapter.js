@@ -1,33 +1,38 @@
 import stripePackage from 'stripe';
+import {SubscriptionsConfig as Config} from "../../config"
+import {Logger as logger} from "/server/api";
 
-export default class StripeAdapter{
+export const StripeAdapter = function () {
 
 
-    import stripePackage from 'stripe';
-    var stripe;
+    function stripe() {
+        let stripe = stripePackage(Config.config.stripe_secret_key);
+        logger.info(`Secret key: ${Config.config.stripe_secret_key}`)
+        return stripe;
+    };
 
-    constructor(){
-      stripe=_configure();
+    return {
+        createSubscription: function (subscription) {
+
+            logger.info("Creating new customer and subscription", subscription);
+            let result = Promise.await(stripe().customers.create({
+                    email: 'customer@example.com'
+                }).then(function (customer) {
+                    return stripe().subscriptions.create({
+                        customer: customer.id,
+                        items: [
+                            {
+                                plan: "monthly_999",
+                            },
+                        ]
+                    });
+                }).catch(function (error) {
+                    logger.error("Error creating subscription", error);
+                })
+            );
+            return result;
+        }
     }
-
-    createSubscription(subscription){
-        stripe.subscriptions.create(
-            { email: 'customer@example.com' },
-            function(err, customer) {
-                err; // null if no error occurred
-                customer; // the created customer object
-            }
-        );
-    }
-
-    getSubscription(subscription){
-
-    }
-
-
-    _configure(){
-        stripe = stripePackage(Config.STRIPE_SECRET_KEY);
-        //adddtionalConfig
-    }
-
 }
+
+

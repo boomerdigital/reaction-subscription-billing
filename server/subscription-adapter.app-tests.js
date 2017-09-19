@@ -1,12 +1,12 @@
-
+import nock from "nock";
 import {expect} from "meteor/practicalmeteor:chai";
 import {Meteor} from "meteor/meteor";
 import {Factory} from "meteor/dburles:factory";
 import {Reaction} from "/server/api";
-import {Products, Accounts} from "/lib/collections";
 import {sinon} from "meteor/practicalmeteor:sinon";
 import Fixtures from "/server/imports/fixtures";
 import {Subscriptions} from "./lib/collections/collections"
+import { SubscriptionManager } from "./lib/subscriptionManager";
 import {getShop} from "/server/imports/fixtures/shops";
 
 Fixtures();
@@ -25,8 +25,17 @@ describe("SubscriptionManager", function () {
     });
 
     beforeEach(function () {
-        Wishlist.remove({});
         sandbox = sinon.sandbox.create();
+        const createCustomerResponse= require("./createCustomerResponse");
+        nock('https://api.stripe.com/v1', 'email=test%40example.com')
+            .post('/customers')
+            .reply(200, createCustomerResponse);
+
+        const createSubscriptionResponse= require("./createSubscriptionResponse");
+        nock('https://api.stripe.com/v1')
+            .post('/subscriptions')
+            .reply(200, createSubscriptionResponse)
+
     });
 
     afterEach(function () {
@@ -42,11 +51,10 @@ describe("SubscriptionManager", function () {
         Meteor.users.remove({});
     });
 
-    it("Configures a subscription manager for a desired gateway", function(){
-
-        expect(1+1).eq(3);
+    it("Contacts the gateway for stripe and creates a subscription", function(){
+        let manager=new SubscriptionManager('stripe');
+        const response=manager.createSubscription({email: "bob@dobbs.com"});
+        expect(response.id).to.not.be.null;
     });
-
-
 
 });

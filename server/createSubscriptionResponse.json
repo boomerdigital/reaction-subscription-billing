@@ -1,0 +1,65 @@
+{
+  "id": "sub_BQScTnKStg9NLs",
+  "object": "subscription",
+  "application_fee_percent": null,
+  "billing": "charge_automatically",
+  "cancel_at_period_end": false,
+  "canceled_at": null,
+  "created": 1505788946,
+  "current_period_end": 1508380946,
+  "current_period_start": 1505788946,
+  "customer": "cus_BQSczJOS4cp7Ml",
+  "discount": null,
+  "ended_at": null,
+  "items": {
+    "object": "list",
+    "data": [
+      {
+        "id": "si_1B3bgsL8pIsllErYD59Z9wCK",
+        "object": "subscription_item",
+        "created": 1505788946,
+        "metadata": {},
+        "plan": {
+          "id": "monthly_999",
+          "object": "plan",
+          "amount": 0,
+          "created": 1505327523,
+          "currency": "usd",
+          "interval": "month",
+          "interval_count": 1,
+          "livemode": false,
+          "metadata": {},
+          "name": "Monthly_999",
+          "statement_descriptor": null,
+          "trial_period_days": null
+        },
+        "quantity": 1
+      }
+    ],
+    "has_more": false,
+    "total_count": 1,
+    "url": "/v1/subscription_items?subscription=sub_BQScTnKStg9NLs"
+  },
+  "livemode": false,
+  "metadata": {},
+  "plan": {
+    "id": "monthly_999",
+    "object": "plan",
+    "amount": 0,
+    "created": 1505327523,
+    "currency": "usd",
+    "interval": "month",
+    "interval_count": 1,
+    "livemode": false,
+    "metadata": {},
+    "name": "Monthly_999",
+    "statement_descriptor": null,
+    "trial_period_days": null
+  },
+  "quantity": 1,
+  "start": 1505788946,
+  "status": "active",
+  "tax_percent": null,
+  "trial_end": null,
+  "trial_start": null
+}
