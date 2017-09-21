@@ -1,23 +1,24 @@
-
+import nock from "nock";
 import {expect} from "meteor/practicalmeteor:chai";
 import {Meteor} from "meteor/meteor";
 import {Factory} from "meteor/dburles:factory";
-import * as Collections from "/lib/collections";
 import {Reaction} from "/server/api";
-import {Products, Accounts} from "/lib/collections";
 import {sinon} from "meteor/practicalmeteor:sinon";
 import Fixtures from "/server/imports/fixtures";
 import {Subscriptions} from "./lib/collections/collections"
+import {methods} from "./methods/subscription-payments"
 import {getShop} from "/server/imports/fixtures/shops";
+import {Logger as logger} from "/server/api";
 
 Fixtures();
 
 
 
-describe("Subscription", function () {
+describe("subscription/process", function () {
     const user = Factory.create("registeredUser");
     const shop = getShop();
     const userId = user._id;
+    const cart = Factory.create("cartTwo");
     const sessionId = Reaction.sessionId = Random.id();
     let sandbox;
 
@@ -26,7 +27,6 @@ describe("Subscription", function () {
     });
 
     beforeEach(function () {
-        Wishlist.remove({});
         sandbox = sinon.sandbox.create();
     });
 
@@ -43,10 +43,12 @@ describe("Subscription", function () {
         Meteor.users.remove({});
     });
 
-    it("Creates a Subscription for a user and order", function(){
-
-    })
-
-
-
+    it("subcriptions/process", function(){
+         Meteor.call("subscriptions/process",user,cart,"monthly_999",function(error,response){
+             expect(response.id).to.not.be.null;
+             done();
+    });
+  });
 });
+
+

@@ -12,17 +12,18 @@ export const StripeAdapter = function () {
     };
 
     return {
+       //subscription: {user: user, plan: "planId:string", user: "user:object"}
         createSubscription: function (subscription) {
 
-            logger.info("Creating new customer and subscription", subscription);
+            logger.info("Creating new customer and subscription: ", subscription.user.emails[0].address );
             let result = Promise.await(stripe().customers.create({
-                    email: 'customer@example.com'
+                    email: subscription.user.emails[0].address
                 }).then(function (customer) {
                     return stripe().subscriptions.create({
                         customer: customer.id,
                         items: [
                             {
-                                plan: "monthly_999",
+                                plan: subscription.planId,
                             },
                         ]
                     });

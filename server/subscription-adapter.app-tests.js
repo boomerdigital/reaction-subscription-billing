@@ -17,6 +17,7 @@ describe("SubscriptionManager", function () {
     const user = Factory.create("registeredUser");
     const shop = getShop();
     const userId = user._id;
+    const cart = Factory.create("cartTwo");
     const sessionId = Reaction.sessionId = Random.id();
     let sandbox;
 
@@ -53,7 +54,8 @@ describe("SubscriptionManager", function () {
 
     it("Contacts the gateway for stripe and creates a subscription", function(){
         let manager=new SubscriptionManager('stripe');
-        const response=manager.createSubscription({email: "bob@dobbs.com"});
+        const subscriptionData={user: user,cart: cart, planId:"monthly_999"};
+        const response=manager.createSubscription(subscriptionData);
         expect(response.id).to.not.be.null;
     });
 
