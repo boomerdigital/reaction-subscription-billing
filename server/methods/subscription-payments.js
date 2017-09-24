@@ -43,11 +43,13 @@ function processCancellation() {
 
 
 Meteor.methods({
-    "subscriptions/process":  function (user, cart, planId) {
+    "subscriptions/process":  function (user, order, planId) {
 
+        //ToDo improve verification where Object is used by defining required attributes
         check(user, Object)
+        check(order, Object)
         check(planId, String)
-        check(cart, Object)
+
 
 
         let future = new Future();
@@ -60,11 +62,11 @@ Meteor.methods({
         try {
 
             //User does not have account
-            let subscription = {user: user, cart: cart, planId: planId}
+            let subscription = {user: user, order: order, planId: planId}
             future.return(manager.createSubscription(subscription));
 
         } catch (err) {
-            logger.error("Error processing subscription");
+            logger.error("Error processing subscription", err);
         }
 
         return future.wait();

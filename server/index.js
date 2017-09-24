@@ -1,3 +1,4 @@
+import "./hooks";
 import { Meteor } from "meteor/meteor";
 import { Subscriptions } from "./lib/collections/collections";
 import { SubscriptionManager } from "./lib/subscriptionManager";
