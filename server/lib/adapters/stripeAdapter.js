@@ -35,7 +35,7 @@ export const StripeAdapter = function () {
         fetchTransaction: function(transactionId){
             return Promise.await(
                 stripe().charges.retrieve(transactionId).catch(function(error){
-                logger.error(`Error retrieving transaction ${tranasactionId}:`,error);
+                logger.error(`Error retrieving transaction ${transactionId}:`,error);
             }));
         },
         fetchCustomer: function(customerId) {
