@@ -7,6 +7,6 @@ export const Subscriptions = new Mongo.Collection("Subscriptions");
 
 Subscriptions.attachSchema([
     Schemas.Subscription,
-    Schemas.SubscriptionItem,
-    Schemas.MetadataField,
+ //   Schemas.SubscriptionItem,
+  //  Schemas.MetadataField,
 ]);

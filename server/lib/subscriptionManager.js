@@ -1,5 +1,7 @@
 import {SubscriptionsConfig} from  '../config'
-import {Logger} from "/server/api";
+import {Logger as logger} from "/server/api";
+import {Subscriptions} from "./collections";
+
 
 export const SubscriptionManager = function (name) {
 
@@ -9,8 +11,18 @@ export const SubscriptionManager = function (name) {
     }
 
     return {
-        createSubscription: function (customer,subscription) {
-            return getAdapter().createSubscription(customer, subscription);
+        createSubscription: function (customer,paramsHash) {
+            let subscription= getAdapter().createSubscription(customer,paramsHash );
+            let subscriptionReceipt=
+                { id: subscription.id,
+                  userId: paramsHash.user._id,
+                  nextBillingDate: new Date(1000 * subscription.current_period_end),
+                }
+            logger.info("Subscription:", JSON.stringify(subscription));
+            logger.info("Subscription Receipt",subscriptionReceipt);
+            Subscriptions.insert(subscriptionReceipt);
+          //Todo decide on returning gateway response or new object
+          return subscription;
         },
         fetchTransaction: function (transactionId) {
             return getAdapter().fetchTransaction(transactionId);
