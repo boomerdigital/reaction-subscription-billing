@@ -23,7 +23,7 @@ export const StripeAdapter = function () {
             const user  = subscription.user;
             const planId= subscription.planId;
             const order = subscription.order;
-            logger.info("Creating new subscription for Customer: ${customer.id}: ", customer.id );
+            logger.info("Creating new subscription for Customer:",customer.id );
             let result = Promise.await( stripe().subscriptions.create({
                         customer: customer.id,
                         items: [{ plan: planId  }],

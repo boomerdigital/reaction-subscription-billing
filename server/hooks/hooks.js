@@ -21,10 +21,11 @@ MethodHooks.after("cart/copyCartToOrder", (options) => {
     //Then use it to get the customer profile.
     const customerId=fullTransactionDetails.customer;
     const customer=sm.fetchCustomer(customerId);
+    logger.info("Customer", JSON.stringify(customer));
 
     const currentUser=Accounts.findOne({userId: Meteor.userId()});
     //ToDo change to take dynamic planId from interface
-    Meteor.call("subscriptions/process", currentUser,order,"monthly_999")
+    Meteor.call("subscriptions/process", currentUser,customer,order,"monthly_999")
 
     return options;
 });

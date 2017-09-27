@@ -7,6 +7,7 @@ import {sinon} from "meteor/practicalmeteor:sinon";
 import Fixtures from "/server/imports/fixtures";
 import {Subscriptions} from "./lib/collections/collections"
 import { SubscriptionManager } from "./lib/subscriptionManager";
+import {SubscriptionsConfig as Config} from "./config";
 import {getShop} from "/server/imports/fixtures/shops";
 
 Fixtures();
@@ -52,8 +53,10 @@ describe("SubscriptionManager", function () {
         Meteor.users.remove({});
     });
 
-    it("Contacts the gateway for stripe and creates a subscription", function(){
-        let manager=new SubscriptionManager('stripe');
+
+    //ToDo update to take order and retrieve the customer from the transaction
+    it.skip("Contacts the gateway for stripe and creates a subscription", function(){
+        let manager=new SubscriptionManager(Config.config.subscription_processor);
         const subscriptionData={user: user,cart: cart, planId:"monthly_999"};
         const response=manager.createSubscription(subscriptionData);
         expect(response.id).to.not.be.null;

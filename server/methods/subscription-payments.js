@@ -14,10 +14,11 @@ const Future = Npm.require('fibers/future');
 
 
 Meteor.methods({
-    "subscriptions/process": function (user, order, planId) {
+    "subscriptions/process": function (user,customer, order, planId) {
 
         //ToDo improve verification where Object is used by defining required attributes
         check(user, Object)
+        check(customer, Object)
         check(order, Object)
         check(planId, String)
 
@@ -27,7 +28,7 @@ Meteor.methods({
         let future = new Future();
         try {
             let subscription = {user: user, order: order, planId: planId}
-            let result=future.return(manager.createSubscription(subscription));
+            let result=future.return(manager.createSubscription(customer,subscription));
             logger.info(`Result: ${result}`);
 
         } catch (err) {
