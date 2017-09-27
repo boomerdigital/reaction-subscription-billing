@@ -9,8 +9,8 @@ export const SubscriptionManager = function (name) {
     }
 
     return {
-        createSubscription: function (subscription) {
-            return getAdapter().createSubscription(subscription);
+        createSubscription: function (customer,subscription) {
+            return getAdapter().createSubscription(customer, subscription);
         },
         fetchTransaction: function (transactionId) {
             return getAdapter().fetchTransaction(transactionId);

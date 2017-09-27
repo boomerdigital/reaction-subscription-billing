@@ -5,65 +5,30 @@ import {Random} from "meteor/random";
 import {Reaction, Logger as logger} from "/server/api";
 import {Cart, Shops, Accounts, Packages} from "/lib/collections";
 import {SubscriptionManager} from "../lib/subscriptionManager"
+import {SubscriptionsConfig as Config} from  '../config'
 
-const Future = Npm.require( 'fibers/future' );
-
-
-
-function selectedPaymentProvider() {
-
-    return "stripe";
-}
+const Future = Npm.require('fibers/future');
 
 
-function userHasAccount() {
-    return false;
-}
 
-function userHasStripeAccount(stripeCustomerId) {
-
-
-    return false;
-}
-
-function isCancellation() {
-
-    false;
-}
-
-
-function processNewSubscription() {
-
-}
-
-function processCancellation() {
-
-
-}
 
 
 Meteor.methods({
-    "subscriptions/process":  function (user, order, planId) {
+    "subscriptions/process": function (user, order, planId) {
 
         //ToDo improve verification where Object is used by defining required attributes
         check(user, Object)
         check(order, Object)
         check(planId, String)
 
-
+        logger.info(`Processing subscription for user ${user._id}`);
+        let manager = SubscriptionManager(Config.config.subscription_processor);
 
         let future = new Future();
-
-        logger.info(`Processing subscription for user ${user._id}`);
-
-        let manager = SubscriptionManager(selectedPaymentProvider());
-
-
         try {
-
-            //User does not have account
             let subscription = {user: user, order: order, planId: planId}
-            future.return(manager.createSubscription(subscription));
+            let result=future.return(manager.createSubscription(subscription));
+            logger.info(`Result: ${result}`);
 
         } catch (err) {
             logger.error("Error processing subscription", err);

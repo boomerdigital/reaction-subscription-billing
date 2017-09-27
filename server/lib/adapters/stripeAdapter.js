@@ -11,21 +11,23 @@ export const StripeAdapter = function () {
     }
 
     return {
-       //subscription: {user: user, plan: "planId:string", user: "user:object"}
-        createSubscription: function (subscription) {
-            const order = subscription.order;
+        createCustomer: function(reactionUser){
+            let result=Promise.await( stripe().customers.create({
+                email:reactionUser.emails[0].address
+            }).catch(function(error){
+                logger.error("Error creating subscription", error);
+            }));
+            return result;
+        },
+        createSubscription: function (customer,subscription) {
             const user  = subscription.user;
             const planId= subscription.planId;
-
-            logger.info("Creating new customer and subscription for: ", subscription.user.emails[0].address );
-            let result = Promise.await(stripe().customers.create({
-                    email: subscription.user.emails[0].address
-                }).then(function (customer) {
-                    return stripe().subscriptions.create({
+            const order = subscription.order;
+            logger.info("Creating new subscription for Customer: ${customer.id}: ", customer.id );
+            let result = Promise.await( stripe().subscriptions.create({
                         customer: customer.id,
                         items: [{ plan: planId  }],
                         metadata: {orderId : order._id}
-                    });
                 }).catch(function (error) {
                     logger.error("Error creating subscription", error);
                 })
