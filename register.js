@@ -19,6 +19,12 @@ Reaction.registerPackage({
             name: 'dashboardProductImporter',
             workflow: 'coreWorkflow',
             priority: 2
-        }
+        },
+        {
+            route: "subscriptions/plans",
+            name: "plans",
+            template: "plans",
+            workflow: "coreWorkflow"
+        },
     ]
 })
