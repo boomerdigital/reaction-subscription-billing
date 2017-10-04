@@ -9,22 +9,23 @@ Reaction.registerPackage({
     },
     registry: [
         {
+            route: '/dashboard/subscriptions',
             provides: 'dashboard',
+            workflow: 'coreWorkflow',
+            name: 'dashboardProductImporter',
             label: 'Subscriptions',
             description: 'Subscriptions ',
-            route: '/dashboard/subscriptions',
             icon: 'fa fa-repeat',
             container: 'core',
             template: 'subscriptions',
-            name: 'dashboardProductImporter',
-            workflow: 'coreWorkflow',
             priority: 2
         },
         {
-            route: "subscriptions/plans",
+            route: "/subscriptions/plans",
             name: "plans",
             template: "plans",
-            workflow: "coreWorkflow"
+            workflow: "coreWorkflow",
+            layout: "coreLayout"
         },
     ]
 })

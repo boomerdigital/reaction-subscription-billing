@@ -1,5 +1,7 @@
-import "./components"
-import "./containers"
 import "./templates"
+import { registerComponent } from "@reactioncommerce/reaction-components";
+import "./components"
 
-export {default as PlansContainer} from "./containers"
+import { PlansContainer } from "./containers";
+
+registerComponent("PlansContainer", PlansContainer);

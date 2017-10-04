@@ -21,4 +21,5 @@ class PlansContainer extends React.Component {
         )
     }
 }
+
 export default PlansContainer;
