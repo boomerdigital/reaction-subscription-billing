@@ -8,6 +8,6 @@ Template.plans.helpers({
     component() {
         console.log("The Plans",PlansContainer);
 
-        return { component: PlansContainer} ;
+        return  PlansContainer;
     }
 });
