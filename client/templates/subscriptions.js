@@ -1,13 +1,12 @@
-import {PlansContainer} from "../containers/plansContainer.js"
-import {Plans} from "../components/plans/plansComponent.js"
+import { Components } from "@reactioncommerce/reaction-components";
 import { Template } from "meteor/templating";
-import { Divider } from "/imports/plugins/core/ui/client/components";
+import Subscriptions from "../containers/subscription";
 
-Template.plans.helpers({
 
-    component() {
-        console.log("The Plans",PlansContainer);
-
-        return  PlansContainer;
-    }
+Template.subscriptions.helpers({
+  subscriptions() {
+    return {
+      component: Components.Subscription
+    };
+  }
 });

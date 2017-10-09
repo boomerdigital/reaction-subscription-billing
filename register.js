@@ -22,8 +22,8 @@ Reaction.registerPackage({
         },
         {
             route: "/subscriptions/plans",
-            name: "plans",
-            template: "plans",
+            name: "subscriptions",
+            template: "subscriptions",
             workflow: "coreWorkflow",
             layout: "coreLayout"
         },

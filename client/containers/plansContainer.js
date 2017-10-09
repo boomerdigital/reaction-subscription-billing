@@ -1,25 +1,12 @@
 import React, { Component } from "react";
+import { Meteor } from "meteor/meteor";
 
-class PlansContainer extends React.Component {
-    constructor (props) {
-        super(props)
-
-        this.state = {
-            // ...
-        }
-    }
-
-    someFunction () {
-        // ...
-    }
-
-    render () {
-        return (
-            <div>
-                <h1> The plans are workign</h1>
-            </div>
-        )
-    }
+class PlansContainer extends Component {
+  render() {
+    return (
+      <div>Hey Buddy</div>
+    )
+  }
 }
 
 export default PlansContainer;

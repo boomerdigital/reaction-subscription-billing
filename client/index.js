@@ -1,7 +1,17 @@
-import "./templates"
+import "./templates/subscriptions.html";
+import "./templates/subscriptions";
+
 import { registerComponent } from "@reactioncommerce/reaction-components";
-import "./components"
 
-import { PlansContainer } from "./containers";
+import {
+  Subscription,
+  PlansList,
+} from "./components";
 
-registerComponent("PlansContainer", PlansContainer);
+import {
+  SubscriptionContainer,
+  PlansListContainer
+} from "./containers";
+
+registerComponent("Subscription", Subscription);
+registerComponent("PlansList", PlansList);
