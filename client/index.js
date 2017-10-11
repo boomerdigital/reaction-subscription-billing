@@ -1,7 +1,6 @@
-import "./templates"
-import { registerComponent } from "@reactioncommerce/reaction-components";
+import { registerComponent } from "/imports/plugins/core/ui/client/components";
 import "./components"
 
-import { PlansContainer } from "./containers";
+//import { PlansContainer } from "./containers";
 
-registerComponent("PlansContainer", PlansContainer);
+//registerComponent("PlansContainer", PlansContainer);

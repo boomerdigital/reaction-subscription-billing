@@ -18,7 +18,7 @@ class PlansContainer extends React.Component {
             <div>
                 <h1> The plans are workign</h1>
             </div>
-        )
+        );
     }
 }
 

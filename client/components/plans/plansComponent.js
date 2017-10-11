@@ -6,7 +6,7 @@ const metafields = [
     { key: "Condition", value: "New" },
 ]
 
-export default class Plans extends React.Component{
+ class PlansComponent extends React.Component{
     constructor(props) {
         super(props);
     }
@@ -17,5 +17,6 @@ export default class Plans extends React.Component{
         );
     }
 };
+export default PlansComponent;
 
 
