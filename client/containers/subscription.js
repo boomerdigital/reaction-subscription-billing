@@ -1,22 +1,69 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { compose } from "recompose";
 import { registerComponent, composeWithTracker } from "@reactioncommerce/reaction-components";
-import { Subscription } from "../components/subscription";
-import PlansListContainer from "./plansListContainer";
+import { Meteor } from "meteor/meteor";
+import { Reaction } from "/client/api";
+import { Orders, Cart } from "/lib/collections";
+import { Subscription } from "../components";
 
-class SubscriptionContainer extends Component {
-  render() {
-    console.log("here in SubscriptionContainer")
-    return (
-      <PlansListContainer />
-    );
-    return null;
-  };
+function copyCart() {
+  const storedCart = Cart.findOne();
+  return Meteor.call("cart/copyCartToOrder", storedCart._id)
 }
+
+const wrapComponent = (Comp) => (
+  class SubscriptionContainer extends Component {
+    static propTypes = {
+      storedCart: PropTypes.object
+    }
+
+    constructor(props) {
+      super(props);
+    }
+
+    handleAddToCart = () => {
+      const orderId = copyCart();
+      if ( orderId ) {
+
+      } else {
+        // catch the error
+        // redirect to what needs to be done
+      }
+    }
+
+    render() {
+      return (
+        <Comp
+          storedCart={this.props.storedCart}
+          onAddToCart={this.handleAddToCart}
+          {...this.props}
+        />
+      );
+      return null;
+    };
+  }
+);
 
 function composer(props, onData) {
-  onData(null, {});
+  const storedCart = Cart.findOne();
+
+  if(storedCart) {
+    onData(null, {
+      storedCart,
+      copyCart
+    });
+  } else {
+    onData(null, {});
+  }
 }
 
-registerComponent("SubscriptionContainer", SubscriptionContainer, composeWithTracker(composer));
+registerComponent("Subscription", Subscription, [
+  composeWithTracker(composer),
+  wrapComponent
+]);
 
-export default composeWithTracker(composer)(SubscriptionContainer);
+export default compose(
+  composeWithTracker(composer),
+  wrapComponent
+)(Subscription);

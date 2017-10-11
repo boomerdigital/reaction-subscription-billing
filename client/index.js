@@ -9,9 +9,8 @@ import {
 } from "./components";
 
 import {
-  SubscriptionContainer,
   PlansListContainer
 } from "./containers";
 
-registerComponent("Subscription", Subscription);
+registerComponent("subscription", Subscription);
 registerComponent("PlansList", PlansList);

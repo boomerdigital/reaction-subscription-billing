@@ -1,7 +1,13 @@
 import React, { Component } from "react";
-import { registerComponent } from "@reactioncommerce/reaction-components";
+import { Components, registerComponent } from "@reactioncommerce/reaction-components";
+// import Plan from "./plan";
 
 class PlansList extends Component {
+  // get plans options
+  handlePlanClick = (event, plan) => {
+
+  }
+
   render() {
     console.log("yo");
     return (

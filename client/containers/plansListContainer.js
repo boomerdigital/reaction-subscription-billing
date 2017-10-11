@@ -4,8 +4,12 @@ import { registerComponent, composeWithTracker } from "@reactioncommerce/reactio
 import PlansList from "../components";
 
 class PlansListContainer extends Component {
+  handleRender = () => {
+  }
+
   render() {
     console.log("here in PlansListContainer")
+
     return (
       <PlansList />
     );
