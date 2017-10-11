@@ -26,7 +26,7 @@ import {SimpleSchema } from "meteor/aldeed:simple-schema";
 //
 // });
 
-export const Subscription= new SimpleSchema({
+export const Subscription = new SimpleSchema({
 
     id: {
         type: String,
@@ -66,6 +66,4 @@ export const Subscription= new SimpleSchema({
     //     type: [MetadataField],
     //     optional: false
     // }
-
-
 });
