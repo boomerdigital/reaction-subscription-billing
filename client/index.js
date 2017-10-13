@@ -5,12 +5,12 @@ import { registerComponent } from "@reactioncommerce/reaction-components";
 
 import {
   Subscription,
+  Plan,
   PlansList,
 } from "./components";
 
-import {
-  PlansListContainer
-} from "./containers";
+import "./containers";
 
 registerComponent("subscription", Subscription);
-registerComponent("PlansList", PlansList);
+registerComponent("plan", Plan);
+registerComponent("plansList", PlansList);

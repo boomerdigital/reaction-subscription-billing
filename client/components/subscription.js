@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Components } from "@reactioncommerce/reaction-components";
-import { ReactionLayout } from "/imports/plugins/core/layout/lib";
-import { PlansList } from "./";
+import PlansList from "./plansList";
 
 class Subscription extends Component {
 
@@ -15,16 +14,18 @@ class Subscription extends Component {
   }
 
   render() {
-    this.props.onAddToCart();
     return (
-      <PlansList />
+      <PlansList
+        plans={this.props.subscriptionPlans}
+      />
     );
   }
 }
 
 Subscription.propTypes = {
   storedCart: PropTypes.object,
-  onAddToCart: PropTypes.func
+  onAddToCart: PropTypes.func,
+  subscriptionPlans: PropTypes.array
 }
 
 export default Subscription;

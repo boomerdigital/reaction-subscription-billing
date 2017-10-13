@@ -1,23 +1,45 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Components, registerComponent } from "@reactioncommerce/reaction-components";
-// import Plan from "./plan";
+import Plan from "./plan";
 
 class PlansList extends Component {
   // get plans options
-  handlePlanClick = (event, plan) => {
 
+  renderPlans(plans) {
+    if (Array.isArray(plans)) {
+      return plans["data"].map((plan, index) => {
+        return (
+          <Plan
+            plan={plan} key={index} index={index}
+          />
+        );
+      });
+    }
+    return (
+      <div className="row">
+        <div className="text-center">
+          <h3>
+            No subscription plans found.
+          </h3>
+        </div>
+      </div>
+    );
   }
 
   render() {
-    console.log("yo");
     return (
-      <div className="plans-list">
-        <h1>I am here now.</h1>
+      <div className="container-main">
+        <ul className="plans-list">
+          {this.renderPlans(this.props.plans)}
+        </ul>
       </div>
     );
-  };
+  }
 }
 
-// registerComponent("PlansList", PlansList);
+PlansList.propTypes = {
+  plans: PropTypes.array
+}
 
 export default PlansList;

@@ -33,5 +33,23 @@ Meteor.methods({
     }
 
     return future.wait();
+  },
+  "subscriptions/listPlans": function (limit) {
+    check(limit, Object);
+    logger.info("Listing plans");
+    let manager = SubscriptionManager(Config.config.subscription_processor);
+
+    let future = new Future();
+
+    try {
+      future.return(manager.listPlans(limit));
+
+    } catch (err) {
+      logger.error("Error listing subscription plans", err);
+      future.return(err);
+    }
+
+    return future.wait();
   }
+
 });

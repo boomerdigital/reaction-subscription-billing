@@ -5,11 +5,22 @@ import { registerComponent, composeWithTracker } from "@reactioncommerce/reactio
 import { Meteor } from "meteor/meteor";
 import { Reaction } from "/client/api";
 import { Orders, Cart } from "/lib/collections";
-import { Subscription } from "../components";
+import Subscription from "../components/subscription";
 
 function copyCart() {
   const storedCart = Cart.findOne();
   return Meteor.call("cart/copyCartToOrder", storedCart._id)
+}
+
+function listPlans(){
+  let plans = Meteor.call("subscriptions/listPlans", { limit: 3 }, (error, result) => {
+    if (error) {
+      console.error("Error", error);
+    } else {
+      console.info("Result", result);
+    }
+  });
+  return plans;
 }
 
 const wrapComponent = (Comp) => (
@@ -47,11 +58,13 @@ const wrapComponent = (Comp) => (
 
 function composer(props, onData) {
   const storedCart = Cart.findOne();
+  const subscriptionPlans = listPlans();
 
   if(storedCart) {
     onData(null, {
       storedCart,
-      copyCart
+      copyCart,
+      subscriptionPlans
     });
   } else {
     onData(null, {});

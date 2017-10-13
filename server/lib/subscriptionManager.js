@@ -29,6 +29,9 @@ export const SubscriptionManager = function (name) {
     },
     fetchCustomer: function (customerId){
       return getAdapter().fetchCustomer(customerId);
+    },
+    listPlans: function (limit) {
+      return getAdapter().listPlans(limit);
     }
   }
 }

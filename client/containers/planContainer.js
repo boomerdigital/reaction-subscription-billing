@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { registerComponent } from "@reactioncommerce/reaction-components";
-import { Reaction } from "/client/api";
-import PlansList from "../components/plansList";
+import Plan from "../components/plan";
 
 const wrapComponent = (Comp) => (
-  class PlansListContainer extends Component {
+  class PlanContainer extends Component {
     static propTypes = {
-      plans: PropTypes.array
+      plan: PropTypes.string
     }
 
     constructor(props) {
@@ -18,7 +17,7 @@ const wrapComponent = (Comp) => (
     render() {
       return (
         <Comp
-          plans={this.props.plans}
+          plan={this.props.plan}
         />
       );
       return null;
@@ -26,6 +25,6 @@ const wrapComponent = (Comp) => (
   }
 );
 
-registerComponent("PlansList", PlansList, wrapComponent);
+registerComponent("Plan", Plan, wrapComponent);
 
-export default wrapComponent(PlansList);
+export default wrapComponent(Plan);
