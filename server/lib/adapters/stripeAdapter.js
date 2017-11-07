@@ -21,6 +21,8 @@ export const StripeAdapter = function () {
         },
         createSubscription: function (customer,subscription) {
             const user  = subscription.user;
+            logger.error("stripeAdapter -> createSubscription -> customer: ", customer);
+
             const planId= subscription.planId;
             const order = subscription.order;
             logger.info("Creating new subscription for Customer:",customer.id );

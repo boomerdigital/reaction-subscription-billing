@@ -9,10 +9,6 @@ import {SubscriptionsConfig as Config} from  '../config'
 
 const Future = Npm.require('fibers/future');
 
-
-
-
-
 Meteor.methods({
     "subscriptions/process": function (user,customer, order, planId) {
 

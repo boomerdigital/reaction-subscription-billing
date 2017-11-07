@@ -9,19 +9,18 @@ import {Subscriptions} from "./lib/collections/collections"
 import { SubscriptionManager } from "./lib/subscriptionManager";
 import {SubscriptionsConfig as Config} from "./config";
 import {getShop} from "/server/imports/fixtures/shops";
+import {Logger as logger} from "/server/api";
 
 Fixtures();
-
-
 
 describe("SubscriptionManager", function () {
     const user = Factory.create("registeredUser");
     const shop = getShop();
     const userId = user._id;
     const cart = Factory.create("cartTwo");
+    const order = Factory.create("order");
     const sessionId = Reaction.sessionId = Random.id();
     let sandbox;
-
 
     before(function () {
     });
@@ -53,13 +52,13 @@ describe("SubscriptionManager", function () {
         Meteor.users.remove({});
     });
 
-
     //ToDo update to take order and retrieve the customer from the transaction
-    it.skip("Contacts the gateway for stripe and creates a subscription", function(){
+    it("Contacts the gateway for stripe and creates a subscription", function(){
         let manager=new SubscriptionManager(Config.config.subscription_processor);
         const subscriptionData={user: user,cart: cart, planId:"monthly_999"};
         const response=manager.createSubscription(subscriptionData);
         expect(response.id).to.not.be.null;
+        done();
     });
 
 });
