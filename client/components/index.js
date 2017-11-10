@@ -1,2 +1,1 @@
 import "./plans"
-import "./test"
