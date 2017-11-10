@@ -5,7 +5,7 @@ import {Factory} from "meteor/dburles:factory";
 import {Reaction} from "/server/api";
 import {sinon} from "meteor/practicalmeteor:sinon";
 import Fixtures from "/server/imports/fixtures";
-import {Subscriptions} from "./lib/collections/collections"
+import {Subscriptions} from "../lib/collections/collections"
 import { SubscriptionManager } from "./lib/subscriptionManager";
 import {SubscriptionsConfig as Config} from "./config";
 import {getShop} from "/server/imports/fixtures/shops";
@@ -37,6 +37,10 @@ describe("SubscriptionManager", function () {
             .post('/subscriptions')
             .reply(200, createSubscriptionResponse)
 
+        const createPlanResponse= require("./createPlanResponse");
+        nock('https://api.stripe.com/v1')
+            .post('/plans')
+            .reply(200, createPlanResponse.response)
     });
 
     afterEach(function () {
@@ -47,18 +51,43 @@ describe("SubscriptionManager", function () {
         Meteor.users.remove({});
     });
 
-
     afterEach(function () {
         Meteor.users.remove({});
     });
 
     //ToDo update to take order and retrieve the customer from the transaction
     it("Contacts the gateway for stripe and creates a subscription", function(){
-        let manager=new SubscriptionManager(Config.config.subscription_processor);
-        const subscriptionData={user: user,cart: cart, planId:"monthly_999"};
-        const response=manager.createSubscription(subscriptionData);
-        expect(response.id).to.not.be.null;
-        done();
+        let manager = new SubscriptionManager(Config.config.subscription_processor);  //pull up
+
+        const planData = {
+          id: "some_demo_plan", 
+          name: "Some Demo Plan", 
+          amount: 1000, 
+          currency: "usd",
+          interval: "month"
+        };
+        let plan = manager.createPlan(planData); // pull up
+
+        const subscriptionData = { user: user, cart: cart, planId: plan.id };
+        const subscription = manager.createSubscription(subscriptionData);
+        expect(subscription.id).to.not.be.null;
+        //done();
+    });
+
+    it("Contacts the gateway for stripe and creates a plan", function(){
+        let manager = new SubscriptionManager(Config.config.subscription_processor);  // pull up
+
+        const planData = {
+          id: "some_demo_plan", 
+          name: "Some Demo Plan", 
+          amount: 1000, 
+          currency: "usd",
+          interval: "month"
+        };
+        let plan = manager.createPlan(planData);
+
+        expect(plan.id).to.not.be.null;
+        //done();  
     });
 
 });

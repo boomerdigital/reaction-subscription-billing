@@ -5,7 +5,7 @@ import {Factory} from "meteor/dburles:factory";
 import {Reaction} from "/server/api";
 import {sinon} from "meteor/practicalmeteor:sinon";
 import Fixtures from "/server/imports/fixtures";
-import {Subscriptions} from "./lib/collections/collections"
+import {Subscriptions} from "../lib/collections/collections"
 import {methods} from "./methods/subscription-payments"
 import {getShop} from "/server/imports/fixtures/shops";
 import {Logger as logger} from "/server/api";
