@@ -1,0 +1,41 @@
+{
+  "scope": "https://api.stripe.com:443",
+  "method": "POST",
+  "path": "/v1/plans",
+  "body": "id=some_demo_plan&name=Some%20Demo%20Plan&currency=usd&amount=1000&interval=month",
+  "status": 400,
+  "response": {
+    "error": {
+      "type": "invalid_request_error",
+      "message": "Plan already exists."
+    }
+  },
+  "rawHeaders": [
+    "Server",
+    "nginx",
+    "Date",
+    "Fri, 10 Nov 2017 17:04:55 GMT",
+    "Content-Type",
+    "application/json",
+    "Content-Length",
+    "96",
+    "Connection",
+    "close",
+    "Access-Control-Allow-Credentials",
+    "true",
+    "Access-Control-Allow-Methods",
+    "GET, POST, HEAD, OPTIONS, DELETE",
+    "Access-Control-Allow-Origin",
+    "*",
+    "Access-Control-Expose-Headers",
+    "X-Stripe-Privileged-Session-Required,stripe-manage-version,X-Stripe-External-Auth-Required",
+    "Access-Control-Max-Age",
+    "300",
+    "Cache-Control",
+    "no-cache, no-store",
+    "Request-Id",
+    "req_zTfL8d0QNUuRp4",
+    "Stripe-Version",
+    "2017-08-15"
+  ]
+}
