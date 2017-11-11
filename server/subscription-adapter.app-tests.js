@@ -5,7 +5,7 @@ import {Factory} from "meteor/dburles:factory";
 import {Reaction} from "/server/api";
 import {sinon} from "meteor/practicalmeteor:sinon";
 import Fixtures from "/server/imports/fixtures";
-import {Subscriptions} from "../lib/collections/collections"
+import {Subscriptions, Plans} from "../lib/collections/collections"
 import { SubscriptionManager } from "./lib/subscriptionManager";
 import {SubscriptionsConfig as Config} from "./config";
 import {getShop} from "/server/imports/fixtures/shops";
@@ -49,15 +49,17 @@ describe("SubscriptionManager", function () {
 
     after(function () {
         Meteor.users.remove({});
+        Plans.direct.remove({});
     });
 
     afterEach(function () {
         Meteor.users.remove({});
+        Plans.direct.remove({});
     });
 
     //ToDo update to take order and retrieve the customer from the transaction
     it("Contacts the gateway for stripe and creates a subscription", function(){
-        let manager = new SubscriptionManager(Config.config.subscription_processor);  //pull up
+        let manager = new SubscriptionManager(Config.config.subscription_processor);
 
         const planData = {
           id: "some_demo_plan", 
@@ -66,16 +68,15 @@ describe("SubscriptionManager", function () {
           currency: "usd",
           interval: "month"
         };
-        let plan = manager.createPlan(planData); // pull up
+        let plan = manager.createPlan(planData);
 
         const subscriptionData = { user: user, cart: cart, planId: plan.id };
         const subscription = manager.createSubscription(subscriptionData);
         expect(subscription.id).to.not.be.null;
-        //done();
     });
 
     it("Contacts the gateway for stripe and creates a plan", function(){
-        let manager = new SubscriptionManager(Config.config.subscription_processor);  // pull up
+        let manager = new SubscriptionManager(Config.config.subscription_processor);
 
         const planData = {
           id: "some_demo_plan", 
@@ -87,7 +88,6 @@ describe("SubscriptionManager", function () {
         let plan = manager.createPlan(planData);
 
         expect(plan.id).to.not.be.null;
-        //done();  
     });
 
 });
