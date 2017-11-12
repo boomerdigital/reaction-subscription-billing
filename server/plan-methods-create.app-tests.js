@@ -12,16 +12,13 @@ import {Logger as logger} from "/server/api";
 
 Fixtures();
 
-
-
-describe("subscription/process", function () {
+describe("plans/create", function () {
     const user = Factory.create("registeredUser");
     const shop = getShop();
     const userId = user._id;
     const cart = Factory.create("cartTwo");
     const sessionId = Reaction.sessionId = Random.id();
     let sandbox;
-
 
     before(function () {
     });
@@ -38,17 +35,15 @@ describe("subscription/process", function () {
         Meteor.users.remove({});
     });
 
-
     afterEach(function () {
         Meteor.users.remove({});
     });
 
-    it("subcriptions/process", function(){
-         Meteor.call("subscriptions/process",user,cart,"monthly_999",function(error,response){
-             expect(response.id).to.not.be.null;
-             done();
-    });
-  });
+    // it("plans/create", function(){
+    //      Meteor.call("plans/create",user,cart,"monthly_999",function(error,response){
+    //          expect(response.id).to.not.be.null;
+    //          done();
+    // });
 });
 
 

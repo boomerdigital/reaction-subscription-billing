@@ -10,32 +10,24 @@ import {SubscriptionsConfig as Config} from  '../config'
 const Future = Npm.require('fibers/future');
 
 Meteor.methods({
-    "subscriptions/process": function (user,customer, order, planId) {
+    "plans/create": function (args) {
 
         //ToDo improve verification where Object is used by defining required attributes
-        check(user, Object)
-        check(customer, Object)
-        check(order, Object)
-        check(planId, String)
+        check(args, Object)
 
-        logger.info(`Processing subscription for user ${user._id}`);
         let manager = SubscriptionManager(Config.config.subscription_processor);
 
         let future = new Future();
+
         try {
-            let subscription = {user: user, order: order, planId: planId}
-            let result=future.return(manager.createSubscription(customer,subscription));
-            logger.info(`Result: ${result}`);
+            let result=future.return(manager.createPlan(args));
+            logger.info(`Result from plans/create: ${result}`);
 
         } catch (err) {
-            logger.error("Error processing subscription", err);
+            logger.error("Error creating plan in plans/create", err);
         }
-
         return future.wait();
-
     }
-
-
 })
 
 
