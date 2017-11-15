@@ -20,9 +20,13 @@ describe("SubscriptionManager", function () {
     const cart = Factory.create("cartTwo");
     const order = Factory.create("order");
     const sessionId = Reaction.sessionId = Random.id();
+    const demoPlanId = "some_demo_plan";
     let sandbox;
 
     before(function () {
+        Meteor.call("plans/delete", demoPlanId, function(){
+            done();
+        });
     });
 
     beforeEach(function () {
@@ -43,43 +47,40 @@ describe("SubscriptionManager", function () {
             .reply(200, createPlanResponse.response)
     });
 
-    afterEach(function () {
-        sandbox.restore();
-    });
-
     after(function () {
         Meteor.users.remove({});
         Plans.direct.remove({});
     });
 
     afterEach(function () {
+        sandbox.restore();
         Meteor.users.remove({});
         Plans.direct.remove({});
     });
 
     //ToDo update to take order and retrieve the customer from the transaction
-    it("Contacts the gateway for stripe and creates a subscription", function(){
+    // it("Contacts the gateway for stripe and creates a subscription", function(){
+    //     let manager = new SubscriptionManager(Config.config.subscription_processor);
+
+    //     const planData = {
+    //       id: "some_demo_plan", 
+    //       name: "Some Demo Plan", 
+    //       amount: 1000, 
+    //       currency: "usd",
+    //       interval: "month"
+    //     };
+    //     let plan = manager.createPlan(planData);
+
+    //     const subscriptionData = { user: user, cart: cart, planId: plan.id };
+    //     const subscription = manager.createSubscription(subscriptionData);
+    //     expect(subscription.id).to.not.be.null;
+    // });
+
+    it("KN Contacts the gateway for stripe and creates a plan", function(){
         let manager = new SubscriptionManager(Config.config.subscription_processor);
 
         const planData = {
-          id: "some_demo_plan", 
-          name: "Some Demo Plan", 
-          amount: 1000, 
-          currency: "usd",
-          interval: "month"
-        };
-        let plan = manager.createPlan(planData);
-
-        const subscriptionData = { user: user, cart: cart, planId: plan.id };
-        const subscription = manager.createSubscription(subscriptionData);
-        expect(subscription.id).to.not.be.null;
-    });
-
-    it("Contacts the gateway for stripe and creates a plan", function(){
-        let manager = new SubscriptionManager(Config.config.subscription_processor);
-
-        const planData = {
-          id: "some_demo_plan", 
+          id: demoPlanId, 
           name: "Some Demo Plan", 
           amount: 1000, 
           currency: "usd",

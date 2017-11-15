@@ -48,6 +48,38 @@ export const StripeAdapter = function () {
             );
             return result;
         },
+        listPlans: function() {
+            logger.info("Adapter listing plans:");
+            let plansListResults;
+            try {
+                const plansListPromise = stripe().plans.list({});
+                plansListResults = Promise.await(plansListPromise);
+            } catch(error) {
+                logger.error("Error listing plans in adapter", error.message);
+            }
+
+            const result = [];
+            if (plansListResults && plansListResults.data) {
+                for (const plan of plansListResults.data) {
+                    result.push(plan);
+                }
+            }
+            console.log("******************");
+            console.log(result);
+            console.log("******************");
+            
+            return result;
+        },
+        deletePlan: function(planId) {
+            logger.info("Adapter deleting plan:", planId);
+            let result = Promise.await( stripe().plans.del(
+                    planId
+                ).catch(function (error) {
+                    logger.error("Error deleting plan in adapter", error);
+                })
+            );
+            return result;
+        },
         fetchTransaction: function(transactionId){
             return Promise.await(
                 stripe().charges.retrieve(transactionId).catch(function(error){

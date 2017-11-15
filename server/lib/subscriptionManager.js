@@ -2,7 +2,6 @@ import {SubscriptionsConfig} from  '../config'
 import {Logger as logger} from "/server/api";
 import {Subscriptions, Plans} from "../../lib/collections";
 
-
 export const SubscriptionManager = function (name) {
 
     function getAdapter() {
@@ -41,10 +40,19 @@ export const SubscriptionManager = function (name) {
                 amount: plan.amount,
                 interval: plan.interval
             }
-            logger.info("plan created was: ", plan);
+            //logger.info("plan created was: ", plan);
             //Plans.insert(plan);
             Plans.insert(planReceipt);
             return plan;
+        },
+        listPlans: function() {
+            let plansList = getAdapter().listPlans();
+            logger.info("plans list: ", plansList);
+            return plansList;
+        },
+        deletePlan: function(planId) {
+            let deletedPlan = getAdapter().deletePlan(planId);
+            return deletedPlan;
         },
         fetchTransaction: function (transactionId) {
             return getAdapter().fetchTransaction(transactionId);

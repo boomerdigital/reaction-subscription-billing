@@ -11,7 +11,7 @@ import {Logger as logger} from "/server/api";
 
 Fixtures();
 
-describe("plans/create", function () {
+describe("plans/list", function () {
     let sandbox;
 
     before(function () {
@@ -33,18 +33,12 @@ describe("plans/create", function () {
         Plans.direct.remove({});
     });
 
-    it("KN Creates a new plan based on the planData", function(){
-        const planData = {
-            id: "some_demo_plan", 
-            name: "Some Demo Plan", 
-            amount: 1000, 
-            currency: "usd",
-            interval: "month"
-        };
-        Meteor.call("plans/create",planData,function(error,plan){
-            expect(plan.id).to.not.be.null;
-            console.log(`console.log: Plan that was created is: ${plan}`);
-            logger.info("Plan that was created is: ", plan);
+    it("KN Lists all plan items currently in Stripe", function(){
+        Meteor.call("plans/list", function(error,plansList){
+            let plans = plansList.data;
+            logger.info("Plans List: ", plansList);
+            logger.info("Plans in stripe are: ", plans);
+            expect(plans).to.eq(["foobar"]);
             done();
         });
     });
