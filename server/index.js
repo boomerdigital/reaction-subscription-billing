@@ -5,3 +5,4 @@ import { SubscriptionManager } from "./lib/subscriptionManager";
 import { StripeAdapter } from "./lib/adapters/stripeAdapter";
 import { SubscriptionsConfig } from "./config";
 import "./methods/subscription-payments"
+import "./methods/plans"
