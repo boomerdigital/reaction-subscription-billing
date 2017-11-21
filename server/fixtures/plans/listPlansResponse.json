@@ -1,0 +1,21 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "some_demo_plan",
+      "object": "plan",
+      "amount": 1000,
+      "created": 1510333364,
+      "currency": "usd",
+      "interval": "month",
+      "interval_count": 1,
+      "livemode": false,
+      "metadata": {},
+      "name": "Some Demo Plan",
+      "statement_descriptor":null,
+      "trial_period_days":null
+    }
+  ],
+  "has_more":false,
+  "url":"/v1/plans"
+}
