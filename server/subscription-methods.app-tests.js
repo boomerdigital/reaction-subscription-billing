@@ -12,8 +12,6 @@ import {Logger as logger} from "/server/api";
 
 Fixtures();
 
-
-
 describe("subscription/process", function () {
     const user = Factory.create("registeredUser");
     const shop = getShop();
@@ -21,7 +19,6 @@ describe("subscription/process", function () {
     const cart = Factory.create("cartTwo");
     const sessionId = Reaction.sessionId = Random.id();
     let sandbox;
-
 
     before(function () {
     });
@@ -42,6 +39,8 @@ describe("subscription/process", function () {
     afterEach(function () {
         Meteor.users.remove({});
     });
+
+    //TODO: update these as needed
 
     it("subcriptions/process", function(){
          Meteor.call("subscriptions/process",user,cart,"monthly_999",function(error,response){
