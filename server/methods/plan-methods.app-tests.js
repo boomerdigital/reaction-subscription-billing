@@ -24,29 +24,16 @@ describe("plans/list", function () {
         sandbox = sinon.sandbox.create();
         let fixturesRoot = "../fixtures/"
 
-        // const createCustomerResponse = require(fixturesRoot.concat("customers/createCustomerResponse"));
-        // nock('https://api.stripe.com/v1', 'email=test%40example.com')
-        //     .post('/customers')
-        //     .reply(200, createCustomerResponse);
-
-        // const createSubscriptionResponse = require(fixturesRoot.concat("subscriptions/createSubscriptionResponse"));
-        // nock('https://api.stripe.com/v1')
-        //     .post('/subscriptions')
-        //     .reply(200, createSubscriptionResponse);
-
-        //const createPlanResponse = require(fixturesRoot.concat("plans/createPlanResponse"));
         const createPlanResponse = require("../fixtures/plans/createPlanResponse");
         nock('https://api.stripe.com/v1')
             .post('/plans')
             .reply(200, createPlanResponse.response);
 
-        // const listPlansResponse = require(fixturesRoot.concat("plans/listPlansResponse"));
         const listPlansResponse = require("../fixtures/plans/listPlansResponse");
         nock('https://api.stripe.com/v1', {"encodedQueryParams":true})
             .get('/plans')
             .reply(200, listPlansResponse);
 
-        // const deletePlanResponse = require(fixturesRoot.concat("plans/deletePlanResponse"));
         const deletePlanResponse = require("../fixtures/plans/deletePlanResponse");
         nock('https://api.stripe.com/v1', {"encodedQueryParams":true})
             .delete('/plans/some_demo_plan')
@@ -68,7 +55,7 @@ describe("plans/list", function () {
         Plans.direct.remove({});
     });
 
-    it("KN Lists all plan items currently in Stripe", function(){
+    it("Lists all plan items currently in Stripe", function(){
         const planData = {
             id: "some_demo_plan", 
             name: "Some Demo Plan", 
@@ -103,29 +90,16 @@ describe("plans/create", function () {
 
         let fixturesRoot = "../fixtures/"
 
-        // const createCustomerResponse = require(fixturesRoot.concat("customers/createCustomerResponse"));
-        // nock('https://api.stripe.com/v1', 'email=test%40example.com')
-        //     .post('/customers')
-        //     .reply(200, createCustomerResponse);
-
-        // const createSubscriptionResponse = require(fixturesRoot.concat("subscriptions/createSubscriptionResponse"));
-        // nock('https://api.stripe.com/v1')
-        //     .post('/subscriptions')
-        //     .reply(200, createSubscriptionResponse);
-
-        //const createPlanResponse = require(fixturesRoot.concat("plans/createPlanResponse"));
         const createPlanResponse = require("../fixtures/plans/createPlanResponse");
         nock('https://api.stripe.com/v1')
             .post('/plans')
             .reply(200, createPlanResponse.response);
 
-        // const listPlansResponse = require(fixturesRoot.concat("plans/listPlansResponse"));
         const listPlansResponse = require("../fixtures/plans/listPlansResponse");
         nock('https://api.stripe.com/v1', {"encodedQueryParams":true})
             .get('/plans')
             .reply(200, listPlansResponse);
 
-        // const deletePlanResponse = require(fixturesRoot.concat("plans/deletePlanResponse"));
         const deletePlanResponse = require("../fixtures/plans/deletePlanResponse");
         nock('https://api.stripe.com/v1', {"encodedQueryParams":true})
             .delete('/plans/some_demo_plan')
@@ -147,7 +121,7 @@ describe("plans/create", function () {
         Plans.direct.remove({});
     });
 
-    it("KN Creates a new plan in stripe and locally based on the planData", function(){
+    it("Creates a new plan in stripe and locally based on the planData", function(){
         const planData = {
             id: "some_demo_plan", 
             name: "Some Demo Plan", 
@@ -179,19 +153,16 @@ describe("plans/delete", function () {
 
         let fixturesRoot = "../fixtures/"
 
-        //const createPlanResponse = require(fixturesRoot.concat("plans/createPlanResponse"));
         const createPlanResponse = require("../fixtures/plans/createPlanResponse");
         nock('https://api.stripe.com/v1')
             .post('/plans')
             .reply(200, createPlanResponse.response);
 
-        // const listPlansResponse = require(fixturesRoot.concat("plans/listPlansResponse"));
         const listPlansResponse = require("../fixtures/plans/listPlansResponse");
         nock('https://api.stripe.com/v1', {"encodedQueryParams":true})
             .get('/plans')
             .reply(200, listPlansResponse);
 
-        // const deletePlanResponse = require(fixturesRoot.concat("plans/deletePlanResponse"));
         const deletePlanResponse = require("../fixtures/plans/deletePlanResponse");
         nock('https://api.stripe.com/v1', {"encodedQueryParams":true})
             .delete('/plans/some_demo_plan')
@@ -213,7 +184,7 @@ describe("plans/delete", function () {
         Plans.direct.remove({});
     });
 
-    it("KN Deletes a new plan in stripe and locally based on the planData", function(){
+    it("Deletes a new plan in stripe and locally based on the planData", function(){
         const planData = {
             id: "some_demo_plan", 
             name: "Some Demo Plan", 
@@ -222,8 +193,6 @@ describe("plans/delete", function () {
             interval: "month"
         };
         Meteor.call("plans/create", planData);
-
-        nock.recorder.rec();
 
         Meteor.call("plans/delete",planData,function(error,result){
             deletedPlan = result;

@@ -32,9 +32,6 @@ describe("SubscriptionManager", function () {
     beforeEach(function () {
         sandbox = sinon.sandbox.create();
 
-        // let fixturesRoot = "./fixtures/"
-
-        // const createCustomerResponse = require(fixturesRoot.concat("customers/createCustomerResponse"));
         const createCustomerResponse = require("./fixtures/customers/createCustomerResponse");
         nock('https://api.stripe.com/v1', 'email=test%40example.com')
             .post('/customers')
@@ -72,7 +69,7 @@ describe("SubscriptionManager", function () {
         Plans.direct.remove({});
     });
 
-    // it("KN throws an error if subscription processor config isn't passed to new subscription manager instance", function(){        
+    // it("throws an error if subscription processor config isn't passed to new subscription manager instance", function(){        
     //     expect(new SubscriptionManager()).to.throw(TypeError);
     // });
 
@@ -121,7 +118,7 @@ describe("SubscriptionManager", function () {
         expect(plans).to.not.be.empty;
     });
 
-    it("KN deletes a plan via the gateway", function(){
+    it("deletes a plan via the gateway", function(){
         const planData = {
             id: "some_demo_plan", 
             name: "Some Demo Plan", 
